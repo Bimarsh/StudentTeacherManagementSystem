@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="updateStudent" method="post">
+	<form action="edit" method="post" modelAttribute="editStudentForm">
 		<table align="center">
 			<tr>
 				<td>Name</td>
