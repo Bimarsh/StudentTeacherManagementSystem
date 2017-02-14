@@ -75,8 +75,9 @@ DataSource dataSource;
 	@Override
 	public Student getStudentById(String id) {
 	Student student = new Student();	
-    String query="select * from student where id=?";
+	 String query="select * from student where id=?";
     try {
+
 		ps=dataSource.getConnection().prepareStatement(query);
 		ps.setString(1, id);
 		System.out.println("id from dao: "+id);
@@ -111,6 +112,25 @@ DataSource dataSource;
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void addStudent(Student student) {
+		String query = "insert into student (name, address, marks) values (?,?,?)";
+
+		try {
+			ps = dataSource.getConnection().prepareStatement(query);
+			ps.setString(1, student.getName());
+			ps.setString(2, student.getAddress());
+			ps.setString(3, student.getGrade());
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		
 	}
 
 }
