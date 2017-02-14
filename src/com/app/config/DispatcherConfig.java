@@ -5,13 +5,17 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import com.app.dao.StudentDao;
+import com.app.dao.StudentDaoImpl;
+import com.app.dao.UserDao;
+import com.app.dao.UserDaoImpl;
 
 
 @Configuration
@@ -34,7 +38,7 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
 		return resolver;
 	}
 	@Bean 
-	public DriverManagerDataSource ds()
+	public DataSource datasource()
 	{
 		DriverManagerDataSource datasource= new DriverManagerDataSource();
 		datasource.setDriverClassName("com.mysql.jdbc.Driver");
@@ -42,6 +46,17 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
 		datasource.setUsername("root");
 		datasource.setPassword("");
 		return datasource;
+	}
+	@Bean
+	public UserDao dao()
+	{
+		
+		return new UserDaoImpl();
+	}
+	@Bean
+	public StudentDao studentDao()
+	{
+		return new StudentDaoImpl();
 	}
 
 }

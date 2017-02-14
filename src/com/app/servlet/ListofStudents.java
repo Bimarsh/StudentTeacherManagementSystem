@@ -1,4 +1,4 @@
-package com.app.servlet;
+/*package com.app.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,25 +14,25 @@ import com.app.dao.StudentDao;
 import com.app.dao.StudentDaoImpl;
 import com.app.modal.Student;
 
-/**
+*//**
  * Servlet implementation class listofStudents
- */
+ *//*
 @WebServlet(name = "listofStudents", urlPatterns = { "/list" })
 public class ListofStudents extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
+	*//**
 	 * @see HttpServlet#HttpServlet()
-	 */
+	 *//*
 	public ListofStudents() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
+	*//**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
-	 */
+	 *//*
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		StudentDao dao = new StudentDaoImpl();
@@ -43,3 +43,4 @@ public class ListofStudents extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 }
+*/

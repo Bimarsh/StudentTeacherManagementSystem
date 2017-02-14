@@ -16,6 +16,7 @@ public class WebXmlConfig implements WebApplicationInitializer {
 		//creating root and registering the dispatcher class
 		AnnotationConfigWebApplicationContext rootContext=new AnnotationConfigWebApplicationContext();
 		rootContext.register(DispatcherConfig.class);
+
 		
 		//lifecycle container of the root application context
 		arg0.addListener(new ContextLoaderListener(rootContext));

@@ -8,26 +8,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.app.modal.Student;
 
 public class StudentDaoImpl implements StudentDao {
+@Autowired
+DataSource dataSource;
 
-	Connection conn = null;
 	PreparedStatement ps = null;
 	ResultSet res = null;
-	String user = "root";
-	String password = "";
-	String url = "jdbc:mysql://localhost:3306/ittraining";
 
-	public Connection getConnection() {
-		try {
-			conn = DriverManager.getConnection(url, user, password);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return conn;
-	}
 
 	@Override
 	public List<Student> getallStudents() {
@@ -35,7 +28,7 @@ public class StudentDaoImpl implements StudentDao {
 
 		String query = "select * from student";
 		try {
-			ps = getConnection().prepareStatement(query);
+			ps = dataSource.getConnection().prepareStatement(query);
 			res = ps.executeQuery();
 			while (res.next()) {
 				Student student = new Student();
@@ -53,7 +46,6 @@ public class StudentDaoImpl implements StudentDao {
 		finally
 		{
 			try {
-				conn.close();
 				ps.close();
 				res.close();
 			} catch (SQLException e) {
@@ -69,7 +61,7 @@ public class StudentDaoImpl implements StudentDao {
 	public void deleteStudent(String id) {
 		String query="delete from student where id=?";
 		try {
-			ps=getConnection().prepareStatement(query);
+			ps=dataSource.getConnection().prepareStatement(query);
 			ps.setString(1,id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -85,7 +77,7 @@ public class StudentDaoImpl implements StudentDao {
 	Student student = new Student();	
     String query="select * from student where id=?";
     try {
-		ps=getConnection().prepareStatement(query);
+		ps=dataSource.getConnection().prepareStatement(query);
 		ps.setString(1, id);
 		System.out.println("id from dao: "+id);
 		res=ps.executeQuery();
@@ -109,7 +101,7 @@ public class StudentDaoImpl implements StudentDao {
 
 		String query="update student set name=?,address=?,marks=? where id=?";
 		try {
-			ps=getConnection().prepareStatement(query);
+			ps=dataSource.getConnection().prepareStatement(query);
 			ps.setString(1, student.getName());
 			ps.setString(2, student.getAddress());
 			ps.setString(3, student.getGrade());
